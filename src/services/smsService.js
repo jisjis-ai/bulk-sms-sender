@@ -3,7 +3,10 @@ import cors from 'cors';
 import puppeteer from 'puppeteer';
 
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: process.env.FRONTEND_URL || 'https://fluffy-begonia-c64229.netlify.app',
+  credentials: true
+}));
 app.use(express.json());
 
 let browser = null;
@@ -102,7 +105,7 @@ app.post('/connect', async (req, res) => {
   }
 });
 
-const port = process.env.PORT || 3001;
+const port = process.env.PORT || 8080;
 app.listen(port, () => {
   console.log(`SMS service running on port ${port}`);
 });
